@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tip Calculator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <style>
+        #input-container, .card{
+            width: 300px;
+            margin: auto;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1 class="text-center mt-5 mb-5">Tip Calculator</h1>
+
+    <div class="mb-3" id="input-container">
+        <div class="mb-3">
+            <label for="bill-amount" class="form-label fw-bold">Bill Amount ($)</label>
+            <input type="number" class="form-control" id="bill-amount">
+        </div>
+        <div class="mb-3">
+            <label for="tip-percentage" class="form-label fw-bold">Tip Percentage (%)</label>
+            <input type="number" class="form-control" id="tip-percentage">
+        </div>
+        <button id="calculate" class="btn btn-primary" onclick="calculate()">Calculate</button>
+    </div>
+
+    <div id="message-container" class="text-center sm fs-6 text-danger d-none">
+        <p>Please fill both fields above.</p>
+    </div>
+
+    <div class="card d-none mt-3" id="result-card">
+        <div class="card-body">
+            <h5 class="card-title">Results</h5>
+            <ul>
+                <li>
+                    <strong>Tip Amount:</strong>
+                    <span id="tip-amount"></span>
+                </li>
+                <li>
+                    <strong>Total Amount:</strong>
+                    <span id="total-amount"></span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+
+        function calculate(){
+            let billAmountElement = document.getElementById('bill-amount').value;
+            let tipPercentageElement = document.getElementById('tip-percentage').value; 
+            let resultCard = document.getElementById('result-card');
+            let messageContainer = document.getElementById('message-container');
+
+            if(billAmountElement != '' && tipPercentageElement != ''){
+
+                let billAmount = parseFloat(billAmountElement);
+                let tipPercentage = parseFloat(tipPercentageElement);
+
+
+                messageContainer.classList.add('d-none');
+
+
+                let tipAmount = billAmount * (tipPercentage/100);
+                let totalAmount = billAmount + tipAmount;
+    
+                resultCard.classList.remove('d-none');
+    
+                document.getElementById('tip-amount').innerText = `$ ${tipAmount.toFixed(2)}`; 
+                document.getElementById('total-amount').innerText = `$ ${totalAmount.toFixed(2)}`;
+
+
+    
+            }else{
+                messageContainer.classList.remove('d-none');
+            }
+
+
+        }
+
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>
